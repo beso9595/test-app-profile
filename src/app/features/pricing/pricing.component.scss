@@ -1,0 +1,20 @@
+:host {
+  width: 100%;
+}
+
+.pricing {
+  display: flex;
+  justify-content: space-around;
+
+  .tier {
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .btn {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

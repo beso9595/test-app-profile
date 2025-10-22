@@ -1,0 +1,19 @@
+<div class="pricing">
+  <app-card *ngFor="let tier of pricingList"
+            [title]="tier.title"
+            [width]="width"
+            [height]="height">
+    <div class="tier">
+      <div>
+        <h2>{{tier.price}}$/Month</h2>
+        <h3>{{tier.description}}</h3>
+        <ul>
+          <li *ngFor="let adv of tier.advantages">{{adv}}</li>
+        </ul>
+      </div>
+      <div class="btn">
+        <button mat-raised-button [color]="tier.btnColor" (click)="onChoose(tier.id)">Choose</button>
+      </div>
+    </div>
+  </app-card>
+</div>

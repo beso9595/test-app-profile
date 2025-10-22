@@ -10,5 +10,5 @@ import { CardComponent } from "../../shared/components/card/card.component";
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
-
+  title = 'About Us';
 }
