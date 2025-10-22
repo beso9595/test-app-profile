@@ -1,6 +1,14 @@
 <div class="header">
   <img ngSrc="assets/images/logo.svg" height="33" width="100" alt="logo">
   <div class="menu">
+    <ng-container *ngFor="let item of menuList">
+      <a *ngIf="item.authenticated ? isAuthenticated : true"
+         [routerLink]="item.route"
+         [routerLinkActive]="'active-link'"
+         class="menu-item">{{item.title}}</a>
+    </ng-container>
+    <ng-container *ngIf="isAuthenticated">
 
+    </ng-container>
   </div>
 </div>
