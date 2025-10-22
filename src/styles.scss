@@ -1,7 +1,9 @@
+@import "variables";
 
 html,
 body {
   margin: 0;
   height: 100%;
   font-family: 'Roboto', sans-serif;
+  background-color: $bg-color;
 }
