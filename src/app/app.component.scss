@@ -11,6 +11,10 @@
 }
 
 .content {
+  width: calc(100% - 2 * $side-padding);
+  display: flex;
+  justify-content: center;
+  padding: 150px $side-padding;
   position: absolute;
   z-index: $content-z-position;
 }
