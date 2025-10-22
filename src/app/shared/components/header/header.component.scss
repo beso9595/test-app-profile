@@ -1,0 +1,16 @@
+@import 'variables';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: calc(100% - 2 * $side-padding);
+  height: 50px;
+  background-color: $header-bg-color;
+  box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px $side-padding;
+  position: sticky;
+  top: 0;
+  z-index: 111;
+}
