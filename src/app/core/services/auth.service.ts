@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs";
-import {User} from "../models/user";
+import { BehaviorSubject } from "rxjs";
+import { User } from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -10,4 +10,6 @@ export class AuthService {
   authUser$ = new BehaviorSubject<User | null>(null);
 
   constructor() { }
+
+  login(email: string, password: string) {}
 }

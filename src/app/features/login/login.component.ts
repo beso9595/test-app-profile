@@ -7,11 +7,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { RouterLink } from "@angular/router";
 
-interface LoginForm {
-  email: FormControl<string | null>;
-  password: FormControl<string | null>;
-}
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -31,12 +26,12 @@ interface LoginForm {
 export class LoginComponent {
   title = 'Login';
   width = '400px';
-  form: FormGroup<LoginForm>;
+  form: FormGroup;
 
   constructor() {
-    this.form = new FormGroup<LoginForm>({
-      email: new FormControl<string | null>(null, [Validators.required, Validators.email]),
-      password: new FormControl<string | null>(null, Validators.required),
+    this.form = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, Validators.required),
     });
   }
 

@@ -18,3 +18,15 @@
   position: absolute;
   z-index: $content-z-position;
 }
+
+.loader {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+
+  mat-spinner {
+    z-index: $loader-z-index;
+  }
+}
