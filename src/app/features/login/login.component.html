@@ -1,0 +1,25 @@
+<div class="login">
+  <app-card [title]="title" [width]="width">
+    <div class="login-step" [formGroup]="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your Email</mat-label>
+        <input matInput placeholder="sam@example.com" formControlName="email">
+        <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email')">Incorrect email format</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your Password</mat-label>
+        <input matInput type="password" formControlName="password">
+        <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="onLogin()">Sign In</button>
+    </div>
+
+    <div class="line-separator"></div>
+    <div class="forgot-register-step">
+      <button mat-raised-button>Forgot Password</button>
+      <button mat-raised-button color="primary" [routerLink]="'/sign-up'">Registration</button>
+    </div>
+  </app-card>
+</div>

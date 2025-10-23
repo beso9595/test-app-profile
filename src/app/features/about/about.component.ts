@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from "../../shared/components/card/card.component";
 
@@ -7,7 +7,8 @@ import { CardComponent } from "../../shared/components/card/card.component";
   standalone: true,
   imports: [CommonModule, CardComponent],
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss']
+  styleUrls: ['./about.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent {
   title = 'About Us';

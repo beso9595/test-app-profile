@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from "../../shared/components/card/card.component";
 import { MatButtonModule } from "@angular/material/button";
@@ -8,7 +8,8 @@ import { MatButtonModule } from "@angular/material/button";
   standalone: true,
   imports: [CommonModule, CardComponent, MatButtonModule],
   templateUrl: './pricing.component.html',
-  styleUrls: ['./pricing.component.scss']
+  styleUrls: ['./pricing.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PricingComponent {
   width = '300px';
