@@ -74,7 +74,9 @@
           <button *ngIf="selectedFile" mat-icon-button matSuffix (click)="selectedFile = undefined">
             <mat-icon>close</mat-icon>
           </button>
-          <mat-hint *ngIf="!form.get('avatar')?.hasError('imageSizeExceed')">Images with side less then 5MB</mat-hint>
+          <mat-hint *ngIf="!form.get('avatar')?.hasError('imageSizeExceed')">
+            Images with side less then {{imageUploadSize}}MB
+          </mat-hint>
           <mat-error *ngIf="form.get('avatar')?.hasError('imageSizeExceed')">Website is required</mat-error>
         </mat-form-field>
         <button mat-raised-button (click)="fileInput.click()">

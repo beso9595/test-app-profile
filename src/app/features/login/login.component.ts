@@ -5,7 +5,10 @@ import { MatButtonModule } from "@angular/material/button";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from "../../core/services/auth.service";
+import { delay, of } from "rxjs";
+import { HelperService } from "../../core/services/helper.service";
 
 @Component({
   selector: 'app-login',
@@ -28,7 +31,11 @@ export class LoginComponent {
   width = '400px';
   form: FormGroup;
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private helperService: HelperService,
+  ) {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
@@ -36,6 +43,15 @@ export class LoginComponent {
   }
 
   onLogin(): void {
-    console.log(this.form.value);
+    this.helperService.loader$.next(true);
+    of('').pipe(delay(1000)).subscribe(() => { // simulate loading
+      this.helperService.loader$.next(false);
+      //
+      const { email, password } = this.form.value;
+      const result = this.authService.login(email, password);
+      if (result) {
+        this.router.navigate(['profile']);
+      }
+    });
   }
 }

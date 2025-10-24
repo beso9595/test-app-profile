@@ -21,7 +21,6 @@ import {
   take,
   takeUntil,
 } from "rxjs";
-import countries from "../../core/data/country-list";
 import { Country } from "../../core/models/country";
 import { MatIconModule } from "@angular/material/icon";
 import { MatRadioModule } from "@angular/material/radio";
@@ -29,6 +28,9 @@ import { HelperService } from "../../core/services/helper.service";
 import { UserService } from "../../core/services/user.service";
 import { PopupService } from "../../core/services/popup.service";
 import { AuthService } from "../../core/services/auth.service";
+import { Router } from "@angular/router";
+import countries from "../../shared/data/country-list";
+import { GLOBAL } from "../../shared/data/global";
 
 function imageSizeExceed(): ValidatorFn {
   return () => ({ imageSizeExceed: true  });
@@ -63,12 +65,14 @@ export class RegistrationComponent implements OnDestroy {
   seconds = 0;
   timerOngoing = false;
   disableVerify = true;
+  imageUploadSize = GLOBAL.IMAGE_UPLOAD_SIZE
 
   constructor(
     private helperService: HelperService,
     private userService: UserService,
     private popupService: PopupService,
     private authService: AuthService,
+    private router: Router,
   ) {
     this.form = new FormGroup({
       id: new FormControl(crypto.randomUUID()),
@@ -111,7 +115,7 @@ export class RegistrationComponent implements OnDestroy {
     if (file) {
       this.selectedFile = file;
       const kbs = parseInt((file.size/ 1024).toFixed(1), 10);
-      if (kbs > 5000) {
+      if (kbs > (this.imageUploadSize * 1000)) {
         this.form.get('avatar')?.setValidators(imageSizeExceed());
       } else {
         this.form.get('avatar')?.clearValidators();
@@ -202,9 +206,12 @@ export class RegistrationComponent implements OnDestroy {
 
   private save(): void {
     const { country, countryPhoneIndex, ...user } = this.form.getRawValue();
-    this.userService.addUser(user);
+    this.userService.addUser({...user});
     this.popupService.open('Success', `User successfully registered`);
-    this.authService.login(user.email, user.password);
+    const result = this.authService.login(user.email, user.password);
+    if (result) {
+      this.router.navigate(['profile']);
+    }
   }
 
   ngOnDestroy(): void {

@@ -2,7 +2,7 @@
   <img ngSrc="assets/images/logo.svg" height="33" width="100" alt="logo">
   <div class="menu">
     <ng-container *ngFor="let item of menuList">
-      <a *ngIf="item.authenticated ? isAuthenticated : true"
+      <a *ngIf="item.showWhenLoggedIn === undefined ? true : (item.showWhenLoggedIn ? isAuthenticated : !isAuthenticated)"
          [routerLink]="item.route"
          [routerLinkActive]="'active-link'"
          class="menu-item">{{item.title}}</a>

@@ -1,4 +1,4 @@
-import { Country } from "../models/country";
+import { Country } from "../../core/models/country";
 
 const countries: Country[] = [
   { code: "AF", name: "Afghanistan", phone_index: "+93" },

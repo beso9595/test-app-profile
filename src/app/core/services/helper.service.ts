@@ -9,9 +9,9 @@ export class HelperService {
   loader$ = new BehaviorSubject<boolean>(false);
 
   menuList: NavigationItem[] = [
-    { title: 'About Us', route: '/about', authenticated: false },
-    { title: 'Pricing', route: '/pricing', authenticated: false },
-    { title: 'Sign In', route: '/sign-in', authenticated: false }
+    { title: 'About Us', route: '/about' },
+    { title: 'Pricing', route: '/pricing' },
+    { title: 'Sign In', route: '/sign-in', showWhenLoggedIn: false }
   ];
 
   userSubMenuList: NavigationItem[] = [

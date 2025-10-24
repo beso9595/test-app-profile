@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HelperService } from "./core/services/helper.service";
 import { UserService } from "./core/services/user.service";
+import { AuthService } from "./core/services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,12 @@ export class AppComponent {
 
   constructor(
     private helperService: HelperService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {
     this.helperService.loader$.subscribe(v => this.loader = v);
     //
     this.userService.loadData();
+    this.authService.initAuth();
   }
 }
