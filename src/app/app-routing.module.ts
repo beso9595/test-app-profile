@@ -6,6 +6,7 @@ import { LoginComponent } from "./features/login/login.component";
 import { RegistrationComponent } from "./features/registration/registration.component";
 import { ProfileComponent } from "./features/profile/profile.component";
 import { AuthGuard } from "./core/guards/auth.guard";
+import { LogoutComponent } from "./features/logout/logout.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/about', pathMatch: 'full' },
@@ -13,7 +14,16 @@ const routes: Routes = [
   { path: 'pricing', component: PricingComponent },
   { path: 'sign-in', component: LoginComponent },
   { path: 'sign-up', component: RegistrationComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'edit', component: ProfileComponent, data: { edit: true } },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
+    ]
+  },
+  { path: 'logout', component: LogoutComponent },
   { path: '**', redirectTo: '/about' }
 ];
 

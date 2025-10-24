@@ -16,8 +16,8 @@ export class HelperService {
 
   userSubMenuList: NavigationItem[] = [
     { title: 'Profile', route: '/profile' },
-    { title: 'Edit Profile', route: '/edit-profile' },
-    { title: 'Log Out', route: '/log-out' },
+    { title: 'Edit Profile', route: '/profile/edit' },
+    { title: 'Log Out', route: '/logout' },
   ];
 
   constructor() { }
