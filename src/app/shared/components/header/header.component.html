@@ -2,13 +2,22 @@
   <img ngSrc="assets/images/logo.svg" height="33" width="100" alt="logo">
   <div class="menu">
     <ng-container *ngFor="let item of menuList">
-      <a *ngIf="item.showWhenLoggedIn === undefined ? true : (item.showWhenLoggedIn ? isAuthenticated : !isAuthenticated)"
+      <div *ngIf="item.showWhenLoggedIn === undefined ? true : (item.showWhenLoggedIn ? isAuthenticated : !isAuthenticated)"
          [routerLink]="item.route"
-         [routerLinkActive]="'active-link'"
-         class="menu-item">{{item.title}}</a>
+         [routerLinkActive]="'active-item'"
+         class="menu-item">{{item.title}}</div>
     </ng-container>
     <ng-container *ngIf="isAuthenticated">
-
+      <div class="profile-sub-menu menu-item"
+           [matMenuTriggerFor]="menu">
+        <img [src]="(authService.authUser$ | async)?.avatar" alt="avatar" class="avatar"/>
+        <a class="menu-item" (click)="$event.preventDefault(); ">{{(authService.authUser$ | async)?.username}}</a>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button *ngFor="let item of userSubMenuList" mat-menu-item [routerLink]="item.route">
+          {{item.title}}
+        </button>
+      </mat-menu>
     </ng-container>
   </div>
 </div>

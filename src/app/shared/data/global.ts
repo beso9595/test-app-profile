@@ -1,3 +1,3 @@
 export const GLOBAL = {
-  IMAGE_UPLOAD_SIZE: 2, // mb
+  IMAGE_UPLOAD_SIZE: 1, // mb
 }

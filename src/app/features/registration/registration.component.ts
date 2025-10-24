@@ -134,8 +134,7 @@ export class RegistrationComponent implements OnDestroy {
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = () => {
-        const base64Image = reader.result as string;
-        this.form.get('avatar')?.setValue('Base64:' + base64Image);
+        this.form.get('avatar')?.setValue(reader.result as string);
         this.setChooseVerifyTypeMode();
       };
       reader.readAsDataURL(this.selectedFile);
