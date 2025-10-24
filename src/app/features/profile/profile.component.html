@@ -1,1 +1,68 @@
-<p>profile works!</p>
+<div class="profile">
+
+  <app-card [height]="height">
+    <div class="avatar-card">
+      <img [src]="user.avatar" alt="avatar"/>
+      <div class="avatar-control">
+        <h2>{{user.username}}</h2>
+        <button mat-raised-button>
+          <mat-icon>edit</mat-icon>
+          Edit Profile
+        </button>
+      </div>
+    </div>
+  </app-card>
+
+  <app-card title="Profile Info" [height]="height">
+    <div class="profile-info">
+      <div class="row">
+        <div class="field">
+          <mat-icon>account_circle</mat-icon>
+          <div class="data">
+            <label>Username</label>
+            <div>{{user.username || '-'}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <mat-icon>mail</mat-icon>
+          <div class="data">
+            <label>Email</label>
+            <div>{{user.email || '-'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <mat-icon>call</mat-icon>
+          <div class="data">
+            <label>Phone</label>
+            <div>{{phoneNumber || '-'}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <mat-icon>today</mat-icon>
+          <div class="data">
+            <label>Birthday</label>
+            <div>{{user.birthdate ? (user.birthdate | date: 'MM/dd/yyyy') : '-'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <mat-icon>location_on</mat-icon>
+          <div class="data">
+            <label>Country</label>
+            <div>{{countryName || '-'}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <mat-icon>language</mat-icon>
+          <div class="data">
+            <label>Website</label>
+            <div>{{user.website || '-'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</div>
