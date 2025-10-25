@@ -6,6 +6,7 @@ import { NavigationItem } from "../../../core/models/navigationItem";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthService } from "../../../core/services/auth.service";
 import { MatMenuModule } from "@angular/material/menu";
+import { GLOBAL } from "../../data/global";
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,8 @@ export class HeaderComponent {
   userSubMenuList: NavigationItem[] = [];
 
   isAuthenticated = false;
+
+  defaultAvatar = GLOBAL.DEFAULT_AVATAR;
 
   constructor(
     public helperService: HelperService,

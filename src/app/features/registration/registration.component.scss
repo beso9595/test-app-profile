@@ -1,36 +1,19 @@
 @import "variables";
 
+:host {
+  width: 100%;
+}
+
 .registration {
+  app-card {
+    display: flex;
+    justify-content: center;
+  }
+
   .register-step {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-
-    .phone {
-      display: flex;
-      justify-content: space-between;
-
-      mat-form-field:first-child {
-        width: 25%
-      }
-
-      mat-form-field:last-child {
-        width: 70%;
-      }
-    }
-
-    .file-upload {
-      display: flex;
-      justify-content: space-between;
-
-      mat-form-field {
-        width: 70%
-      }
-
-      button {
-        width: 25%;
-      }
-    }
   }
 
   .choose-verify-type-step {

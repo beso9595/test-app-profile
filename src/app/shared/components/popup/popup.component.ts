@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 
 type DialogData = {
@@ -18,9 +18,6 @@ type DialogData = {
   ]
 })
 export class PopupComponent {
-  constructor(
-    public dialogRef: MatDialogRef<PopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
 }

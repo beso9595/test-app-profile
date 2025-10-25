@@ -2,10 +2,10 @@
 
   <app-card [height]="height">
     <div class="avatar-card">
-      <img [src]="user.avatar" alt="avatar"/>
+      <img [src]="user.avatar || defaultAvatar" alt="avatar"/>
       <div class="avatar-control">
         <h2>{{user.username}}</h2>
-        <button mat-raised-button>
+        <button mat-raised-button (click)="onEditClick()">
           <mat-icon>edit</mat-icon>
           Edit Profile
         </button>

@@ -10,7 +10,7 @@
     <ng-container *ngIf="isAuthenticated">
       <div class="profile-sub-menu menu-item"
            [matMenuTriggerFor]="menu">
-        <img [src]="(authService.authUser$ | async)?.avatar" alt="avatar" class="avatar"/>
+        <img [src]="(authService.authUser$ | async)?.avatar || defaultAvatar" alt="avatar" class="avatar"/>
         <a class="menu-item" (click)="$event.preventDefault(); ">{{(authService.authUser$ | async)?.username}}</a>
       </div>
       <mat-menu #menu="matMenu">

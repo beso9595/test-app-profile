@@ -14,15 +14,7 @@ const routes: Routes = [
   { path: 'pricing', component: PricingComponent },
   { path: 'sign-in', component: LoginComponent },
   { path: 'sign-up', component: RegistrationComponent },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: 'edit', component: ProfileComponent, data: { edit: true } },
-      { path: '', redirectTo: 'profile', pathMatch: 'full' },
-    ]
-  },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent },
   { path: '**', redirectTo: '/about' }
 ];

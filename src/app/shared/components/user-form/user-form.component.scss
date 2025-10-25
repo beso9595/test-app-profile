@@ -1,0 +1,21 @@
+$margin-bottom: 10px;
+
+.user-form {
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $margin-bottom;
+
+    mat-form-field {
+      width: 48%;
+    }
+  }
+
+  .website, .file-upload {
+    width: 100%;
+  }
+
+  .submit {
+    width: 100%;
+  }
+}

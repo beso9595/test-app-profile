@@ -1,0 +1,15 @@
+<div class="user-dialog">
+  <div class="title-container">
+    <div class="title">Edit: {{data.user.username}}</div>
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content>
+    <app-user-form *ngIf="data.user"
+                   [mode]="'update'"
+                   [user]="data.user"
+                   (submit)="onUpdate($event)"></app-user-form>
+  </div>
+</div>

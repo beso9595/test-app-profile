@@ -7,6 +7,9 @@ import { AuthService } from "../../core/services/auth.service";
 import { Subject, takeUntil } from "rxjs";
 import countries from "../../shared/data/country-list";
 import { DatePipe } from "@angular/common";
+import { MatDialog } from "@angular/material/dialog";
+import { UserDialogComponent } from "../../shared/components/user-dialog/user-dialog.component";
+import { GLOBAL } from "../../shared/data/global";
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +30,12 @@ export class ProfileComponent implements OnDestroy {
   countryName!: string;
   phoneNumber!: string;
 
-  constructor(private authService: AuthService) {
+  defaultAvatar = GLOBAL.DEFAULT_AVATAR;
+
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog
+  ) {
     this.authService.authUser$.pipe(takeUntil(this.destroy$)).subscribe(u => {
       this.user = u || {} as User;
       if (this.user) {
@@ -38,6 +46,16 @@ export class ProfileComponent implements OnDestroy {
             this.phoneNumber = find.phone_index + ' ' + this.user.phone;
           }
         }
+      }
+    });
+  }
+
+  onEditClick(): void {
+    this.dialog.open(UserDialogComponent, {
+      width: '50%',
+      panelClass: 'user-dialog',
+      data: {
+        user: this.user
       }
     });
   }

@@ -1,90 +1,7 @@
 <div class="registration">
-  <app-card [title]="title" [width]="width">
-    <div *ngIf="mode === 'registration'" class="register-step" [formGroup]="form">
-
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="sam@example.com" formControlName="email">
-        <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
-        <mat-error *ngIf="form.get('email')?.hasError('email')">Incorrect email format</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password">
-        <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username">
-        <mat-error *ngIf="form.get('username')?.hasError('required')">Username is required</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Birthdate</mat-label>
-        <input matInput [matDatepicker]="picker" [max]="maxDate"
-               formControlName="birthdate" (click)="picker.open()" readonly>
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="form.get('birthdate')?.hasError('required')">Birthdate is required</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Country</mat-label>
-        <input type="text"
-               placeholder="Pick one"
-               aria-label="Number"
-               matInput
-               formControlName="country"
-               [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption
-                          #auto="matAutocomplete"
-                          (optionSelected)="onCountrySelect($event)">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option.name}}
-          </mat-option>
-        </mat-autocomplete>
-        <mat-error *ngIf="form.get('country')?.hasError('required')">Country is required</mat-error>
-      </mat-form-field>
-
-      <div class="phone">
-        <mat-form-field appearance="fill">
-          <input matInput formControlName="countryPhoneIndex">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>Phone</mat-label>
-          <input matInput type="number" formControlName="phone">
-          <mat-error *ngIf="form.get('phone')?.hasError('required')">Phone is required</mat-error>
-        </mat-form-field>
-      </div>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Website</mat-label>
-        <input matInput formControlName="website">
-        <mat-error *ngIf="form.get('website')?.hasError('required')">Website is required</mat-error>
-      </mat-form-field>
-
-      <div class="file-upload">
-        <mat-form-field>
-          <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*"/>
-          <input matInput [value]="selectedFile?.name" placeholder="Choose a file" readonly (click)="fileInput.click()"/>
-          <button *ngIf="selectedFile" mat-icon-button matSuffix (click)="selectedFile = undefined">
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-hint *ngIf="!form.get('avatar')?.hasError('imageSizeExceed')">
-            Images with side less then {{imageUploadSize}}MB
-          </mat-hint>
-          <mat-error *ngIf="form.get('avatar')?.hasError('imageSizeExceed')">Website is required</mat-error>
-        </mat-form-field>
-        <button mat-raised-button (click)="fileInput.click()">
-          Choose
-        </button>
-      </div>
-
-      <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="onRegistration()">Sign Up</button>
+  <app-card [title]="title" [width]="mode === 'registration' ? '50%' : width">
+    <div *ngIf="mode === 'registration'" class="register-step">
+      <app-user-form [mode]="'registration'" (submit)="onRegistration($event)"></app-user-form>
     </div>
 
     <div *ngIf="mode === 'choose-verify-type'" class="choose-verify-type-step">
@@ -92,10 +9,10 @@
         <label>Choose your verification type:</label>
         <mat-radio-group [formControl]="verificationType">
           <mat-radio-button value="email">
-            Email: <b>{{form.get('email')?.value}}</b>
+            Email: <b>{{form.email}}</b>
           </mat-radio-button>
           <mat-radio-button value="phone">
-            Phone: <b>{{form.get('countryPhoneIndex')?.value}} {{form.get('phone')?.value}}</b>
+            Phone: <b>{{form.countryPhoneIndex}} {{form.phone}}</b>
           </mat-radio-button>
         </mat-radio-group>
       </div>
