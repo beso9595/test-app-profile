@@ -16,8 +16,14 @@ export class UserService {
   }
 
   getUser(id: string): User | null {
-    const find = this.data.find((u) => u.id === id);
-    return find || null;
+    const user = this.getById(id);
+    if (user) {
+      return {
+        ...user,
+        password: ''
+      }
+    }
+    return null;
   }
 
   checkEmail(email: string): boolean {
@@ -56,9 +62,14 @@ export class UserService {
     return user;
   }
 
+  private getById(id: string): User | null {
+    const find = this.data.find((u) => u.id === id);
+    return find || null;
+  }
+
   private checkNewPassword(userForm: UserForm): string {
     if (userForm.password && userForm.confirmPassword && userForm.newPassword) {
-      const user = this.getUser(userForm.id);
+      const user = this.getById(userForm.id);
       if (user && user.password === (userForm.password + this.secretWord)) {
         return userForm.newPassword + this.secretWord;
       } else {

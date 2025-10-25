@@ -152,6 +152,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       }
       this.form.get('avatar')?.updateValueAndValidity();
       this.form.updateValueAndValidity();
+      this.form.markAsDirty();
     }
   }
 
