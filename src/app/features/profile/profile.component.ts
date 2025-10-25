@@ -10,6 +10,7 @@ import { DatePipe } from "@angular/common";
 import { MatDialog } from "@angular/material/dialog";
 import { UserDialogComponent } from "../../shared/components/user-dialog/user-dialog.component";
 import { GLOBAL } from "../../shared/data/global";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -34,7 +35,8 @@ export class ProfileComponent implements OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.authService.authUser$.pipe(takeUntil(this.destroy$)).subscribe(u => {
       this.user = u || {} as User;
@@ -46,6 +48,14 @@ export class ProfileComponent implements OnDestroy {
             this.phoneNumber = find.phone_index + ' ' + this.user.phone;
           }
         }
+      }
+    });
+    //
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['edit'] === 'true') {
+        setTimeout(() => {
+          this.onEditClick();
+        }, 500);
       }
     });
   }

@@ -14,7 +14,8 @@
         <a class="menu-item" (click)="$event.preventDefault(); ">{{(authService.authUser$ | async)?.username}}</a>
       </div>
       <mat-menu #menu="matMenu">
-        <button *ngFor="let item of userSubMenuList" mat-menu-item [routerLink]="item.route">
+        <button *ngFor="let item of userSubMenuList"
+                mat-menu-item [routerLink]="item.route" [queryParams]="item.queryParams || {}">
           {{item.title}}
         </button>
       </mat-menu>

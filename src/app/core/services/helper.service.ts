@@ -16,7 +16,7 @@ export class HelperService {
 
   userSubMenuList: NavigationItem[] = [
     { title: 'Profile', route: '/profile' },
-    { title: 'Edit Profile', route: '/profile/edit' },
+    { title: 'Edit Profile', route: '/profile', queryParams: { edit: true } },
     { title: 'Log Out', route: '/logout' },
   ];
 
