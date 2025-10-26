@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -65,7 +65,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   maxDate = new Date((new Date()).getFullYear() - 18, 11, 31);
   filteredOptions!: Observable<Country[]>;
   countryList: Country[] = countries;
-  fileName = '';
+  fileName = new FormControl('');
   selectedFile?: File;
   imageUploadSize = GLOBAL.IMAGE_UPLOAD_SIZE
   btnNames = {
@@ -126,7 +126,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       avatar: this.user.avatar,
     });
     if (this.user.avatar) {
-      this.fileName = 'avatar';
+      this.fileName.setValue('avatar');
     }
   }
 
@@ -148,13 +148,16 @@ export class UserFormComponent implements OnInit, OnDestroy {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
-      this.fileName = this.selectedFile?.name || '';
+      this.fileName.setValue(this.selectedFile?.name || '');
       const kbs = parseInt((file.size / 1024).toFixed(1), 10);
       if (kbs > (this.imageUploadSize * 1000)) {
+        this.fileName.setValidators(imageSizeExceed());
         this.form.get('avatar')?.setValidators(imageSizeExceed());
       } else {
+        this.fileName.clearValidators();
         this.form.get('avatar')?.clearValidators();
       }
+      this.fileName.updateValueAndValidity();
       this.form.get('avatar')?.updateValueAndValidity();
       this.form.updateValueAndValidity();
       this.form.markAsDirty();
@@ -162,12 +165,16 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   onFileClear(): void {
-    if (this.fileName) {
+    if (this.fileName.value) {
       this.form.markAsDirty();
     }
     this.selectedFile = undefined;
-    this.fileName = '';
+    this.fileName.setValue('');
+    this.fileName.clearValidators();
+    this.fileName.updateValueAndValidity();
     this.form.get('avatar')?.setValue(null);
+    this.form.get('avatar')?.clearValidators();
+    this.form.get('avatar')?.updateValueAndValidity();
   }
 
   onSubmit(): void {

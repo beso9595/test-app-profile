@@ -92,7 +92,7 @@
 
   <mat-form-field appearance="fill" class="file-upload">
     <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*"/>
-    <input matInput [value]="fileName" placeholder="Choose a file" readonly (click)="fileInput.click()"/>
+    <input matInput [formControl]="fileName" placeholder="Choose a file" readonly (click)="fileInput.click()"/>
     <button *ngIf="fileName" mat-icon-button matSuffix (click)="onFileClear()">
       <mat-icon>close</mat-icon>
     </button>
