@@ -18,18 +18,17 @@
   <div class="row">
     <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" #password>
+      <input matInput type="password" formControlName="password">
       <mat-hint *ngIf="mode === 'update'">Fill to update password</mat-hint>
       <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
-      <mat-error *ngIf="password.value && form.hasError('passwordMismatch')">Password Mismatch</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Confirm Password</mat-label>
-      <input matInput type="password" formControlName="confirmPassword" #passwordConfirm>
+      <input matInput type="password" formControlName="confirmPassword">
       <mat-hint *ngIf="mode === 'update'">Fill to update password</mat-hint>
       <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">Confirm Password is required</mat-error>
-      <mat-error *ngIf="passwordConfirm.value && form.hasError('passwordMismatch')">Password Mismatch</mat-error>
+      <mat-error *ngIf="form.hasError('passwordMismatch')">Password Mismatch</mat-error>
     </mat-form-field>
   </div>
 
@@ -38,6 +37,7 @@
       <mat-label>New Password</mat-label>
       <input matInput type="password" formControlName="newPassword">
       <mat-hint *ngIf="mode === 'update'">Fill to update password</mat-hint>
+      <mat-error *ngIf="form.get('newPassword')?.hasError('required')">New Password is required</mat-error>
     </mat-form-field>
   </div>
 
@@ -52,7 +52,7 @@
       <mat-error *ngIf="form.get('birthdate')?.hasError('required')">Birthdate is required</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field appearance="fill">
       <mat-label>Country</mat-label>
       <input type="text"
              placeholder="Pick one"

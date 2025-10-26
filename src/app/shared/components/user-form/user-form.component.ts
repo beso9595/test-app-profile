@@ -16,6 +16,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatOptionModule } from "@angular/material/core";
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import {
+  combineLatest,
   map,
   Observable,
   startWith,
@@ -30,11 +31,14 @@ import { User } from "../../../core/models/user";
 import { UserForm } from "../../../core/models/user-form";
 
 const passwordMatchValidator: ValidatorFn = (formGroup: AbstractControl): ValidationErrors | null => {
-  const password = formGroup.get('password')?.value;
-  const confirmPassword = formGroup.get('confirmPassword')?.value;
+  const password = formGroup.get('password')!;
+  const confirmPassword = formGroup.get('confirmPassword')!;
 
-  if (password !== confirmPassword) {
+  if (password.value !== confirmPassword.value) {
+    confirmPassword.setErrors({ passwordMismatch: true });
     return { passwordMismatch: true };
+  } else {
+    confirmPassword.setErrors(null);
   }
   return null;
 };
@@ -101,6 +105,18 @@ export class UserFormComponent implements OnInit, OnDestroy {
       this.form.get('country')?.disable();
       //
       this.form.addControl('newPassword', new FormControl(null));
+      //
+      combineLatest([
+        this.form.get('password')!.valueChanges.pipe(startWith(null)),
+        this.form.get('confirmPassword')!.valueChanges.pipe(startWith(null)),
+      ]).pipe(takeUntil(this.destroy$)).subscribe(([password, confirmPassword]) => {
+        if (password || confirmPassword) {
+          this.form.get('newPassword')!.addValidators(Validators.required);
+        } else {
+          this.form.get('newPassword')!.clearValidators();
+        }
+        this.form.get('newPassword')!.updateValueAndValidity();
+      })
     }
     //
     const control = this.form.get('country')!;

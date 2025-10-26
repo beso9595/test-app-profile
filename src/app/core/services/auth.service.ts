@@ -23,15 +23,15 @@ export class AuthService {
       if (this.userService.getUser(user.id)) {
         this.isAuthenticated$.next(true);
         this.authUser$.next(JSON.parse(auth));
-        this.authUser$.subscribe((user) => {
-          if (user) {
-            localStorage.setItem('auth', JSON.stringify(user));
-          } else {
-            localStorage.removeItem('auth');
-          }
-        })
       }
     }
+    this.authUser$.subscribe((user) => {
+      if (user) {
+        localStorage.setItem('auth', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('auth');
+      }
+    });
   }
 
   login(email: string, password: string): boolean {
