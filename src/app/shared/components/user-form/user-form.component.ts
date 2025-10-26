@@ -65,6 +65,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   maxDate = new Date((new Date()).getFullYear() - 18, 11, 31);
   filteredOptions!: Observable<Country[]>;
   countryList: Country[] = countries;
+  fileName = '';
   selectedFile?: File;
   imageUploadSize = GLOBAL.IMAGE_UPLOAD_SIZE
   btnNames = {
@@ -124,6 +125,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
       website: this.user.website,
       avatar: this.user.avatar,
     });
+    if (this.user.avatar) {
+      this.fileName = 'avatar';
+    }
   }
 
   private _filter(value: Country | string): Country[] {
@@ -144,6 +148,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
+      this.fileName = this.selectedFile?.name || '';
       const kbs = parseInt((file.size / 1024).toFixed(1), 10);
       if (kbs > (this.imageUploadSize * 1000)) {
         this.form.get('avatar')?.setValidators(imageSizeExceed());
@@ -156,17 +161,30 @@ export class UserFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  onFileClear(): void {
+    if (this.fileName) {
+      this.form.markAsDirty();
+    }
+    this.selectedFile = undefined;
+    this.fileName = '';
+    this.form.get('avatar')?.setValue(null);
+  }
+
   onSubmit(): void {
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = () => {
         this.form.get('avatar')?.setValue(reader.result as string);
-        this.submit.emit(this.form.getRawValue());
+        this._submit();
       };
       reader.readAsDataURL(this.selectedFile);
     } else {
-      this.submit.emit(this.form.getRawValue());
+      this._submit();
     }
+  }
+
+  private _submit(): void {
+    this.submit.emit(this.form.getRawValue());
   }
 
   ngOnDestroy(): void {

@@ -92,11 +92,11 @@
 
   <mat-form-field appearance="fill" class="file-upload">
     <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*"/>
-    <input matInput [value]="selectedFile?.name" placeholder="Choose a file" readonly (click)="fileInput.click()"/>
-    <button *ngIf="selectedFile" mat-icon-button matSuffix (click)="selectedFile = undefined">
+    <input matInput [value]="fileName" placeholder="Choose a file" readonly (click)="fileInput.click()"/>
+    <button *ngIf="fileName" mat-icon-button matSuffix (click)="onFileClear()">
       <mat-icon>close</mat-icon>
     </button>
-    <button *ngIf="!selectedFile" mat-icon-button matSuffix (click)="fileInput.click()">
+    <button *ngIf="!fileName" mat-icon-button matSuffix (click)="fileInput.click()">
       <mat-icon>drive_folder_upload</mat-icon>
     </button>
     <mat-hint *ngIf="!form.get('avatar')?.hasError('imageSizeExceed')">
