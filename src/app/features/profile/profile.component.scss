@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 :host {
   width: 100%;
@@ -33,6 +34,7 @@
         max-width: 200px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
+        @include avatar-border;
       }
 
       .avatar-control {

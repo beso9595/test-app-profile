@@ -76,7 +76,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.form = new FormGroup({
-      id: new FormControl(crypto.randomUUID()),
+      id: new FormControl((new Date()).getTime().toString()),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null),
       confirmPassword: new FormControl(null),
