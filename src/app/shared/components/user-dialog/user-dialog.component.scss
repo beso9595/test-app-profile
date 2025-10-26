@@ -2,6 +2,7 @@
 
 .user-dialog {
   padding: 15px;
+
   .title-container {
     display: flex;
     justify-content: space-between;
@@ -11,8 +12,15 @@
       font-size: 20px;
       color: $font-color;
     }
+
     mat-icon {
       cursor: pointer;
     }
+  }
+}
+
+@media (max-width: $mobile-max) {
+  .user-dialog-pc {
+    width: 100% !important;
   }
 }

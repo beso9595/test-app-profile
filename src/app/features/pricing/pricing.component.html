@@ -1,8 +1,5 @@
 <div class="pricing">
-  <app-card *ngFor="let tier of pricingList"
-            [title]="tier.title"
-            [width]="width"
-            [height]="height">
+  <app-card *ngFor="let tier of pricingList" [title]="tier.title">
     <div class="tier">
       <div>
         <h2>{{tier.price}}$/Month</h2>

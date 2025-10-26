@@ -27,7 +27,6 @@ import { ActivatedRoute } from "@angular/router";
 export class ProfileComponent implements OnDestroy {
   destroy$ = new Subject<void>();
   user!: User;
-  height = '400px';
   countryName!: string;
   phoneNumber!: string;
 
@@ -62,8 +61,7 @@ export class ProfileComponent implements OnDestroy {
 
   onEditClick(): void {
     this.dialog.open(UserDialogComponent, {
-      width: '50%',
-      panelClass: 'user-dialog',
+      panelClass: 'user-dialog-pc',
       data: {
         user: this.user
       }

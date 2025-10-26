@@ -38,7 +38,6 @@ export class RegistrationComponent implements OnDestroy {
   destroy$ = new Subject();
   mode: 'registration' | 'choose-verify-type' | 'verify' = 'registration';
   title = 'Registration';
-  width = '400px';
   form!: UserForm;
   verificationType = new FormControl('email');
   verificationCode = new FormControl('');

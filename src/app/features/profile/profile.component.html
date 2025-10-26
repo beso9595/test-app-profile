@@ -1,11 +1,16 @@
+<button mat-stroked-button (click)="onEditClick()" class="top-edit-btn">
+  <mat-icon>edit</mat-icon>
+  Edit Profile
+</button>
+
 <div class="profile">
 
-  <app-card [height]="height">
+  <app-card>
     <div class="avatar-card">
       <img [src]="user.avatar || defaultAvatar" alt="avatar"/>
       <div class="avatar-control">
         <h2>{{user.username}}</h2>
-        <button mat-raised-button (click)="onEditClick()">
+        <button mat-raised-button (click)="onEditClick()" class="card-edit-btn">
           <mat-icon>edit</mat-icon>
           Edit Profile
         </button>
@@ -13,7 +18,7 @@
     </div>
   </app-card>
 
-  <app-card title="Profile Info" [height]="height">
+  <app-card title="Profile Info">
     <div class="profile-info">
       <div class="row">
         <div class="field">

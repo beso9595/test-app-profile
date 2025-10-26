@@ -28,7 +28,6 @@ import { HelperService } from "../../core/services/helper.service";
 })
 export class LoginComponent {
   title = 'Login';
-  width = '400px';
   form: FormGroup;
 
   constructor(

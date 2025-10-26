@@ -1,3 +1,5 @@
+@import "variables";
+
 $margin-bottom: 10px;
 
 .user-form {
@@ -17,5 +19,22 @@ $margin-bottom: 10px;
 
   .submit {
     width: 100%;
+  }
+}
+
+@media (max-width: $mobile-max) {
+  .user-form {
+    .row {
+      flex-direction: column;
+      align-items: center;
+
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+
+  .user-dialog-pc {
+    width: 100% !important;
   }
 }

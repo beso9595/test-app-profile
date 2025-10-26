@@ -4,12 +4,22 @@
   width: 100%;
 }
 
+.top-edit-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: $side-bar-padding;
+  color: $header-bg-color !important;
+  border-color: $header-bg-color !important;
+}
+
 .profile {
   display: flex;
   justify-content: space-between;
 
   app-card:first-child {
     width: 30%;
+    height: 400px;
 
     .avatar-card {
       display: flex;
@@ -19,8 +29,9 @@
       height: 100%;
 
       img {
-        width: 250px;
-        height: 250px;
+        width: 80%;
+        max-width: 200px;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
       }
 
@@ -36,6 +47,7 @@
 
   app-card:last-child {
     width: 67%;
+    height: 400px;
 
     .profile-info {
       display: flex;
@@ -80,6 +92,73 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+@media (max-width: $tablet-max) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+
+    app-card {
+      width: 67% !important;
+
+      &:first-child {
+        height: auto !important;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-max) {
+  .top-edit-btn {
+    display: block;
+  }
+
+  .profile {
+    app-card {
+      width: 100% !important;
+    }
+
+    app-card:last-child {
+      height: auto !important;
+    }
+
+    .card-edit-btn {
+      display: none;
+    }
+
+    ::ng-deep app-card:first-child {
+      .card {
+        position: relative;
+        height: auto;
+        //min-height: 0;
+        margin-bottom: 0;
+        box-shadow: none;
+
+        .avatar-card {
+          img {
+            position: absolute;
+            top: -100px;
+          }
+
+          .avatar-control {
+            margin-top: 100px;
+          }
+        }
+      }
+    }
+
+    .row {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      .field {
+        width: 100% !important;
+        margin-bottom: 20px;
       }
     }
   }

@@ -10,6 +10,4 @@ import { CommonModule } from '@angular/common';
 })
 export class CardComponent {
   @Input() title!: string;
-  @Input() width = 'auto';
-  @Input() height = 'auto';
 }

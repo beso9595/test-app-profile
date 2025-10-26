@@ -2,6 +2,33 @@
 
 $header-height: 70px;
 
+@mixin menu-item-mxn {
+  color: $font-color;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+@mixin dropdown-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid grey;
+  }
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -16,6 +43,10 @@ $header-height: 70px;
   top: 0;
   z-index: $header-z-index;
 
+  .expand-icon {
+    display: none;
+  }
+
   .menu {
     display: flex;
     align-items: center;
@@ -24,17 +55,7 @@ $header-height: 70px;
     position: relative;
 
     .menu-item {
-      color: $font-color;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 0 10px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-
-      &:hover {
-        background-color: #f0f0f0;
-      }
+      @include menu-item-mxn;
     }
 
     .active-item {
@@ -42,15 +63,59 @@ $header-height: 70px;
     }
 
     .profile-sub-menu {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .avatar {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        border: 2px solid grey;
-      }
+      @include dropdown-menu;
     }
+  }
+}
+
+.side-bar {
+  display: none;
+  visibility: hidden;
+  position: absolute;
+  width: calc(300px - 2 * $side-bar-padding);
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: $side-bar-z-index;
+  background-color: $header-bg-color;
+  padding: $side-bar-padding 0;
+
+  mat-icon {
+    margin-left: $side-bar-padding;
+  }
+
+  .side-bar-menu {
+    .side-bar-menu-item {
+      @include menu-item-mxn;
+      height: 50px;
+    }
+
+    .side-bar-sub-menu {
+      @include dropdown-menu;
+      justify-content: flex-start;
+    }
+
+    .side-bar-sub-menu-container {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: $mobile-max) {
+  .header {
+    width: calc(100% - 2 * $side-bar-padding);
+    padding: 0 $side-bar-padding;
+
+    .expand-icon {
+      display: block;
+    }
+
+    .menu {
+      display: none;
+    }
+  }
+
+  .side-bar {
+    visibility: visible;
   }
 }

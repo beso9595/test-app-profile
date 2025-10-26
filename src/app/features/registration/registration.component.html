@@ -1,5 +1,5 @@
-<div class="registration">
-  <app-card [title]="title" [width]="mode === 'registration' ? '50%' : width">
+<div class="registration" [class.no-reg]="mode !== 'registration'">
+  <app-card [title]="title">
     <div *ngIf="mode === 'registration'" class="register-step">
       <app-user-form [mode]="'registration'" (submit)="onRegistration($event)"></app-user-form>
     </div>

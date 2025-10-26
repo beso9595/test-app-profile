@@ -1,4 +1,19 @@
+@import "variables";
+
+:host {
+  width: 100%;
+}
+
 .login {
+  display: flex;
+  justify-content: center;
+
+  ::ng-deep app-card {
+    .card {
+      width: 400px;
+    }
+  }
+
   .login-step {
     display: flex;
     flex-direction: column;
@@ -8,5 +23,25 @@
   .forgot-register-step {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: $mobile-max) {
+  .login {
+    ::ng-deep app-card {
+      width: 100%;
+      .card {
+        width: auto;
+        min-width: 0;
+      }
+    }
+
+    .forgot-register-step {
+      flex-direction: column;
+
+      button {
+        margin-bottom: 10px;
+      }
+    }
   }
 }

@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatButtonModule } from "@angular/material/button";
-import { AsyncPipe, NgForOf, NgIf, NgOptimizedImage } from "@angular/common";
+import { AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, NgTemplateOutlet } from "@angular/common";
 import { HelperService } from "../../../core/services/helper.service";
 import { NavigationItem } from "../../../core/models/navigationItem";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthService } from "../../../core/services/auth.service";
 import { MatMenuModule } from "@angular/material/menu";
 import { GLOBAL } from "../../data/global";
+import { MatIconModule } from "@angular/material/icon";
+import { MatRippleModule } from "@angular/material/core";
 
 @Component({
   selector: 'app-header',
@@ -21,10 +23,16 @@ import { GLOBAL } from "../../data/global";
     RouterLinkActive,
     AsyncPipe,
     MatMenuModule,
+    MatIconModule,
+    MatRippleModule,
+    NgTemplateOutlet,
+    NgClass,
   ],
   standalone: true
 })
 export class HeaderComponent {
+  @ViewChild('sideBarSubMenu') sideBarSubMenu!: ElementRef;
+
   menuList: NavigationItem[] = [];
   userSubMenuList: NavigationItem[] = [];
 
@@ -40,5 +48,17 @@ export class HeaderComponent {
     this.userSubMenuList = this.helperService.userSubMenuList;
     //
     this.authService.isAuthenticated$.subscribe(v => this.isAuthenticated = v);
+  }
+
+  onMenuToggle(sideMenu: HTMLDivElement): void {
+    if (sideMenu.style.display === 'block') {
+      sideMenu.style.display = 'none';
+    } else {
+      sideMenu.style.display = 'block';
+    }
+  }
+
+  onSubMenuToggle(): void {
+    this.onMenuToggle(this.sideBarSubMenu.nativeElement);
   }
 }

@@ -1,17 +1,29 @@
-<div class="header">
-  <img ngSrc="assets/images/logo.svg" height="33" width="100" alt="logo">
-  <div class="menu">
-    <ng-container *ngFor="let item of menuList">
-      <div *ngIf="item.showWhenLoggedIn === undefined ? true : (item.showWhenLoggedIn ? isAuthenticated : !isAuthenticated)"
+<ng-template #mainMenu let-itemClasses="itemClasses">
+  <ng-container *ngFor="let item of menuList">
+    <div *ngIf="item.showWhenLoggedIn === undefined ? true : (item.showWhenLoggedIn ? isAuthenticated : !isAuthenticated)"
          [routerLink]="item.route"
          [routerLinkActive]="'active-item'"
-         class="menu-item">{{item.title}}</div>
-    </ng-container>
+         (click)="sideMenu.style.display = 'none'"
+         [ngClass]="itemClasses">{{item.title}}</div>
+  </ng-container>
+</ng-template>
+<ng-template #subMenu let-itemClasses="itemClasses">
+  <img [src]="(authService.authUser$ | async)?.avatar || defaultAvatar" alt="avatar" class="avatar"/>
+  <a [ngClass]="itemClasses" (click)="$event.preventDefault(); ">{{(authService.authUser$ | async)?.username}}</a>
+</ng-template>
+
+
+<div class="header">
+  <img ngSrc="assets/images/logo.svg" height="33" width="100" alt="logo">
+
+  <mat-icon matRipple class="expand-icon" (click)="onMenuToggle(sideMenu)">menu</mat-icon>
+
+  <div class="menu">
+    <ng-container *ngTemplateOutlet="mainMenu; context: { itemClasses: 'menu-item' }"></ng-container>
+
     <ng-container *ngIf="isAuthenticated">
-      <div class="profile-sub-menu menu-item"
-           [matMenuTriggerFor]="menu">
-        <img [src]="(authService.authUser$ | async)?.avatar || defaultAvatar" alt="avatar" class="avatar"/>
-        <a class="menu-item" (click)="$event.preventDefault(); ">{{(authService.authUser$ | async)?.username}}</a>
+      <div class="profile-sub-menu menu-item" [matMenuTriggerFor]="menu">
+        <ng-container *ngTemplateOutlet="subMenu; context: { itemClasses: 'menu-item' }"></ng-container>
       </div>
       <mat-menu #menu="matMenu">
         <button *ngFor="let item of userSubMenuList"
@@ -19,6 +31,30 @@
           {{item.title}}
         </button>
       </mat-menu>
+    </ng-container>
+  </div>
+</div>
+
+<div class="side-bar" #sideMenu>
+  <mat-icon matRipple (click)="onMenuToggle(sideMenu)">arrow_forward</mat-icon>
+  <div class="line-separator"></div>
+  <div class="side-bar-menu">
+    <ng-container *ngTemplateOutlet="mainMenu; context: { itemClasses: 'side-bar-menu-item' }"></ng-container>
+
+    <ng-container *ngIf="isAuthenticated">
+      <div class="side-bar-sub-menu side-bar-menu-item" (click)="onSubMenuToggle()">
+        <ng-container *ngTemplateOutlet="subMenu; context: { itemClasses: 'side-bar-menu-item' }"></ng-container>
+      </div>
+
+      <div #sideBarSubMenu class="side-bar-sub-menu-container">
+        <div *ngFor="let item of userSubMenuList"
+             class="side-bar-menu-item"
+             (click)="sideMenu.style.display = 'none'"
+             [routerLink]="item.route"
+             [queryParams]="item.queryParams || {}">
+          {{item.title}}
+        </div>
+      </div>
     </ng-container>
   </div>
 </div>

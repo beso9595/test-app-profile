@@ -1,16 +1,27 @@
 @import "variables";
 
+$padding: 20px;
+
 .card {
+  height: calc(100% - 2 * $padding);
   min-width: 200px;
   min-height: 300px;
   background-color: $header-bg-color;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: $padding;
+  margin-bottom: 20px;
 
   .title {
     color: $font-color;
     font-weight: bold;
     margin-left: 5px;
     margin-bottom: 15px;
+  }
+}
+
+@media (max-width: $mobile-max) {
+  .card {
+    min-width: 50px;
+    min-height: 0;
   }
 }

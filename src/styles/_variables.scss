@@ -1,11 +1,20 @@
 
+// device sizes for responsiveness
+$tablet-max: 1024px;
+$mobile-max: 767px;
+
+// colors
 $bg-color: #f3f4f4;
 $header-bg-color: #ffffff;
 $font-color: #747474;
 
+// paddings
 $side-padding: 120px;
+$side-bar-padding: 20px; // responsive padding
 
+// z-index list increasing
 $blue-bg-z-index: 1;
 $content-z-position: 999;
 $header-z-index: 9999;
 $loader-z-index: 99999;
+$side-bar-z-index: 999999;
