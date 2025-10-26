@@ -54,7 +54,10 @@ export class UserService {
     }
     this.data = this.data.map((u) => {
       if (u.id === user.id) {
-        return user;
+        return {
+          ...user,
+          password: user.password || u.password,
+        };
       }
       return u;
     });

@@ -17,12 +17,19 @@ export class AuthService {
   ) { }
 
   initAuth(): void {
-    const auth = localStorage.getItem("auth");
+    const auth = localStorage.getItem('auth');
     if (auth) {
       const user = JSON.parse(auth) as User;
       if (this.userService.getUser(user.id)) {
-        this.authUser$.next(JSON.parse(auth));
         this.isAuthenticated$.next(true);
+        this.authUser$.next(JSON.parse(auth));
+        this.authUser$.subscribe((user) => {
+          if (user) {
+            localStorage.setItem('auth', JSON.stringify(user));
+          } else {
+            localStorage.removeItem('auth');
+          }
+        })
       }
     }
   }
@@ -30,7 +37,6 @@ export class AuthService {
   login(email: string, password: string): boolean {
     const user = this.userService.findUser(email, password);
     if (user) {
-      localStorage.setItem('auth', JSON.stringify(user));
       this.authUser$.next(user);
       this.isAuthenticated$.next(true);
       return true;
@@ -40,7 +46,6 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('auth');
     this.isAuthenticated$.next(false);
     this.authUser$.next(null);
   }
