@@ -2,26 +2,53 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
 
-## Development server
+- Registration Page
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+![Registration Page](https://imgur.com/jskOBuS.png)
 
-## Code scaffolding
+- Validations for:
+  - Required fields
+  - Email format
+  - Password mismatch
+  - Birthdate format and range
+  - Country field is dropdown with search
+  - Phone field only numbers
+  - Avatar field has image format and size restriction
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Validations](https://imgur.com/3TlALbU.png)
 
-## Build
+- Choosing verification type
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![Choosing verification type](https://imgur.com/zPoDvqh.png)
 
-## Running unit tests
+- Countdown for verification code and "send again" button
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![Countdown for verification code](https://imgur.com/I3siZNn.png)
 
-## Running end-to-end tests
+- Login Page
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Login Page](https://imgur.com/1KyigH5.png)
 
-## Further help
+- Profile page
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![Profile page](https://imgur.com/Cu8KBgd.png)
+
+- Edit profile:
+  - Email non-editable
+  - Validation for password update(If no "Password" and "Confirm Password" filled, "New password" is not required)
+  - Update or remove avatar
+
+![Edit profile](https://imgur.com/R1FYPcX.png)
+
+- Responsive profile page
+
+![Responsive profile page](https://imgur.com/QrV3UzB.png)
+
+- Responsive edit profile
+
+![Responsive edit profile](https://imgur.com/XB8kXjn.png)
+
+- Responsive menu
+- Avatar item is expandable and collapsable
+
+![Responsive menu](https://imgur.com/kbOIxBz.png)
